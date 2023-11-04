@@ -2,11 +2,11 @@
     <div class="box flex-container" :class="status">
         <input
             type="text"
+            tabindex="-1"
             v-model="character"
         />
     </div>
 </template>
-
 
 <script>
     export default {
@@ -23,9 +23,12 @@
         },
         watch: {
             character(newValue, oldValue) {
+                //not allow to pass multiple character into a singe box
                 if(this.character.length > 1) {
                     this.character = oldValue;
+                    return;
                 } 
+
                 this.$emit('characterChanged', this.position, this.character);
             }
         },
